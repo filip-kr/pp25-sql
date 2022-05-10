@@ -1,32 +1,36 @@
-# Naredba za izvođenje:
-# /opt/lampp/bin/./mysql -uroot < /home/gradjaninf/Dokumenti/pp25-sql/sql/muzej.sql
-
 # Muzej
+
 DROP DATABASE IF EXISTS muzej;
 CREATE DATABASE muzej;
 USE muzej;
 
 CREATE TABLE izlozba(
-    id INT,
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     naziv VARCHAR(50),
     broj_eksponata INT,
     datum_pocetka DATETIME,
     datum_zavrsetka DATETIME,
-    id_kustosa INT,
-    id_sponzora INT
+    kustos INT,
+    sponzor INT
 );
 
 CREATE TABLE kustos(
-    id INT,
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ime VARCHAR(50),
     prezime VARCHAR(50),
-    placa DEC,
-    id_izlozbe INT
+    izlozba INT
 );
 
 CREATE TABLE sponzor(
-    id INT,
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ime VARCHAR(50),
-    id_izlozbe INT,
+    izlozba INT,
     kn DEC
 );
+
+ALTER TABLE izlozba ADD FOREIGN KEY (kustos) REFERENCES kustos(sifra);
+ALTER TABLE izlozba ADD FOREIGN KEY (sponzor) REFERENCES sponzor(sifra);
+
+ALTER TABLE kustos ADD FOREIGN KEY (izlozba) REFERENCES izlozba(sifra);
+
+ALTER TABLE sponzor ADD FOREIGN KEY (izlozba) REFERENCES izlozba(sifra);
