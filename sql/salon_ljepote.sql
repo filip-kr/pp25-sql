@@ -1,30 +1,44 @@
-# Naredba za izvođenje:
-# /opt/lampp/bin/./mysql -uroot < /home/gradjaninf/Dokumenti/pp25-sql/sql/salon_ljepote.sql
-
 # Salon ljepote
+
 DROP DATABASE IF EXISTS salon_ljepote;
 CREATE DATABASE salon_ljepote;
 USE salon_ljepote;
 
 CREATE TABLE djelatnik(
-    ime VARCHAR(50),
-    prezime VARCHAR(50),
-    oib INT(11),
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    osoba INT NOT NULL,
     datum_zaposljenja DATETIME,
-    placa_bruto DEC,
-    placa_neto DEC
+    placa_bruto DEC(18,2),
+    placa_neto DEC(18,2)
 );
 
 CREATE TABLE korisnik(
-    ime VARCHAR(50),
-    prezime VARCHAR(50),
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    osoba INT NOT NULL,
     datum_narucivanja DATETIME,
-    broj_telefona VARCHAR(50),
-    usluga VARCHAR(50)
+    usluga INT
 );
 
 CREATE TABLE usluga(
-    naziv VARCHAR(50),
-    cijena INT,
-    trajanje INT
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    naziv VARCHAR(50) NOT NULL,
+    djelatnik INT,
+    korisnik INT,
+    trajanje INT,
+    cijena DEC(18,2)
 );
+
+CREATE TABLE osoba(
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ime VARCHAR(50) NOT NULL,
+    prezime VARCHAR(50) NOT NULL,
+    oib CHAR(11),
+    broj_telefona INT
+);
+
+ALTER TABLE djelatnik ADD FOREIGN KEY (osoba) REFERENCES osoba(sifra);
+
+ALTER TABLE korisnik ADD FOREIGN KEY (osoba) REFERENCES osoba(sifra);
+
+ALTER TABLE usluga ADD FOREIGN KEY (djelatnik) REFERENCES djelatnik(sifra);
+ALTER TABLE usluga ADD FOREIGN KEY (korisnik) REFERENCES korisnik(sifra);

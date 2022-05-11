@@ -1,32 +1,47 @@
-# Naredba za izvođenje:
-# /opt/lampp/bin/./mysql -uroot < /home/gradjaninf/Dokumenti/pp25-sql/sql/udruga_zivotinje.sql
-
 # Udruga za zaštitu životinja
+
 DROP DATABASE IF EXISTS udruga_zivotinje;
 CREATE DATABASE udruga_zivotinje;
 USE udruga_zivotinje;
 
 CREATE TABLE radnik(
-    ime VARCHAR(50),
-    prezime VARCHAR(50),
-    oib INT(11),
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ime VARCHAR(50) NOT NULL,
+    prezime VARCHAR(50) NOT NULL,
+    oib CHAR(11),
     datum_zaposljenja DATETIME,
-    placa_bruto DEC,
-    placa_neto DEC
+    placa_bruto DEC(18,2),
+    placa_neto DEC(18,2)
+);
+
+CREATE TABLE zivotinja(
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    vrsta VARCHAR(50) NOT NULL,
+    ukupno_sticenika INT,
+    prostor INT NOT NULL
 );
 
 CREATE TABLE sticenik(
-    vrsta VARCHAR(50),
-    ime VARCHAR(50),
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    zivotinja INT NOT NULL,
+    ime VARCHAR(50) NOT NULL,
     datum_rodenja DATETIME,
     datum_prihvata DATETIME,
-    cijepljen BIT
+    cijepljen BOOLEAN,
+    prostor INT NOT NULL
 );
 
 CREATE TABLE prostor(
-    id INT,
-    vrsta VARCHAR(50),
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    zivotinja INT NOT NULL,
     kvadratura INT,
-    trenutni_kapacitet INT,
-    maks_kapacitet INT
+    trenutna_popunjenost INT,
+    maks_kapacitet INT NOT NULL
 );
+
+ALTER TABLE zivotinja ADD FOREIGN KEY (prostor) REFERENCES prostor(sifra);
+
+ALTER TABLE sticenik ADD FOREIGN KEY (zivotinja) REFERENCES zivotinja(sifra);
+ALTER TABLE sticenik ADD FOREIGN KEY (prostor) REFERENCES prostor(sifra);
+
+ALTER TABLE prostor ADD FOREIGN KEY (zivotinja) REFERENCES zivotinja(sifra);

@@ -1,35 +1,47 @@
-# Naredba za izvođenje:
-# /opt/lampp/bin/./mysql -uroot < /home/gradjaninf/Dokumenti/pp25-sql/sql/urar.sql
-
 # Urar
+
 DROP DATABASE IF EXISTS urar;
 CREATE DATABASE urar;
 USE urar;
 
+CREATE TABLE osoba(
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ime VARCHAR(50) NOT NULL,
+    prezime VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE sat(
-    id INT,
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     marka VARCHAR(50),
     vrsta VARCHAR(50),
-    datum_zaprimanja DATETIME,
-    broj_popravka INT
+    datum_zaprimanja DATETIME
 );
 
 CREATE TABLE korisnik(
-    id INT,
-    ime VARCHAR(50),
-    prezime VARCHAR(50),
-    id_sata INT
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    osoba INT NOT NULL,
+    sat INT NOT NULL
 );
 
 CREATE TABLE popravak(
-    id_sata INT,
-    id_korisnika INT,
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    korisnik INT NOT NULL,
+    sat INT NOT NULL,
     datum_zavrsetka DATETIME,
-    kn DEC
+    kn DEC(18,2)
 );
 
 CREATE TABLE segrt(
-    ime VARCHAR(50),
-    prezime VARCHAR(50),
-    id_sata INT
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    osoba INT NOT NULL,
+    popravak INT
 );
+
+ALTER TABLE korisnik ADD FOREIGN KEY (osoba) REFERENCES osoba(sifra);
+ALTER TABLE korisnik ADD FOREIGN KEY (sat) REFERENCES sat(sifra);
+
+ALTER TABLE popravak ADD FOREIGN KEY (korisnik) REFERENCES korisnik(sifra);
+ALTER TABLE popravak ADD FOREIGN KEY (sat) REFERENCES sat(sifra);
+
+ALTER TABLE segrt ADD FOREIGN KEY (osoba) REFERENCES osoba(sifra);
+ALTER TABLE segrt ADD FOREIGN KEY (popravak) REFERENCES popravak(sifra);

@@ -8,8 +8,8 @@ CREATE TABLE djelatnik(
     sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     osoba INT NOT NULL,
     datum_zaposljenja DATETIME,
-    placa_bruto DEC,
-    placa_neto DEC
+    placa_bruto DEC(18,2),
+    placa_neto DEC(18,2)
 );
 
 CREATE TABLE korisnik(
@@ -21,7 +21,7 @@ CREATE TABLE korisnik(
 
 CREATE TABLE usluga(
     sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    naziv VARCHAR NOT NULL(50),
+    naziv VARCHAR(50) NOT NULL,
     djelatnik INT,
     korisnik INT,
     trajanje INT,
@@ -30,8 +30,8 @@ CREATE TABLE usluga(
 
 CREATE TABLE osoba(
     sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    ime VARCHAR NOT NULL(50),
-    prezime VARCHAR NOT NULL(50),
+    ime VARCHAR(50) NOT NULL,
+    prezime VARCHAR(50) NOT NULL,
     oib CHAR(11),
     broj_telefona INT
 );

@@ -1,40 +1,56 @@
-# Naredba za izvođenje:
-# /opt/lampp/bin/./mysql -uroot < /home/gradjaninf/Dokumenti/pp25-sql/sql/taksi_sluzba.sql
-
 # Taksi služba
+
 DROP DATABASE IF EXISTS taksi_sluzba;
 CREATE DATABASE taksi_sluzba;
 USE taksi_sluzba;
 
+CREATE TABLE osoba(
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ime VARCHAR(50) NOT NULL,
+    prezime VARCHAR(50) NOT NULL,
+    oib CHAR(11)
+);
+
 CREATE TABLE vozilo(
-    id INT,
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     marka VARCHAR(50),
     model VARCHAR(50),
-    id_vozaca INT
+    vozac INT
 );
 
 CREATE TABLE vozac(
-    id INT,
-    ime VARCHAR(50),
-    prezime VARCHAR(50),
-    oib INT,
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    osoba INT NOT NULL,
     datum_zaposljenja DATETIME,
-    placa_bruto DEC,
-    placa_neto DEC,
-    id_vozila INT
+    placa_bruto DEC(18,2),
+    placa_neto DEC(18,2),
+    vozilo INT
 );
 
 CREATE TABLE putnik(
-    ime VARCHAR(50),
-    prezime VARCHAR(50),
-    km DEC,
-    cijena DEC
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    osoba INT NOT NULL,
+    km DEC(18,2),
+    cijena DEC(18,2)
 );
 
 CREATE TABLE voznja(
-    id_vozila INT,
-    id_vozaca INT,
-    broj_putnika INT,
-    ukupno_km DEC,
-    ukupno_kn DEC
+    sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    vozilo INT NOT NULL,
+    vozac INT NOT NULL,
+    putnik INT NOT NULL,
+    ukupno_putnika INT,
+    ukupno_km DEC(18,2),
+    ukupno_kn DEC(18,2)
 );
+
+ALTER TABLE vozilo ADD FOREIGN KEY (vozac) REFERENCES vozac(sifra);
+
+ALTER TABLE vozac ADD FOREIGN KEY (osoba) REFERENCES osoba(sifra);
+ALTER TABLE vozac ADD FOREIGN KEY (vozilo) REFERENCES vozilo(sifra);
+
+ALTER TABLE putnik ADD FOREIGN KEY (osoba) REFERENCES osoba(sifra);
+
+ALTER TABLE voznja ADD FOREIGN KEY (vozilo) REFERENCES vozilo(sifra);
+ALTER TABLE voznja ADD FOREIGN KEY (vozac) REFERENCES vozac(sifra);
+ALTER TABLE voznja ADD FOREIGN KEY (putnik) REFERENCES putnik(sifra);

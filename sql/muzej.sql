@@ -25,7 +25,7 @@ CREATE TABLE sponzor(
     sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ime VARCHAR(50),
     izlozba INT,
-    kn DEC
+    kn DEC(18,2)
 );
 
 ALTER TABLE izlozba ADD FOREIGN KEY (kustos) REFERENCES kustos(sifra);
