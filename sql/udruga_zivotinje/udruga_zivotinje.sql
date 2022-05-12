@@ -1,7 +1,7 @@
 # Udruga za zaštitu životinja
 
 DROP DATABASE IF EXISTS udruga_zivotinje;
-CREATE DATABASE udruga_zivotinje;
+CREATE DATABASE udruga_zivotinje default charset utf8mb4;
 USE udruga_zivotinje;
 
 CREATE TABLE radnik(
@@ -10,8 +10,8 @@ CREATE TABLE radnik(
     prezime VARCHAR(50) NOT NULL,
     oib CHAR(11),
     datum_zaposljenja DATETIME,
-    placa_bruto DEC(18,2),
-    placa_neto DEC(18,2)
+    placa_bruto DECIMAL(18,2),
+    placa_neto DECIMAL(18,2)
 );
 
 CREATE TABLE zivotinja(

@@ -1,7 +1,7 @@
 # Doktorska ordinacija
 
 DROP DATABASE IF EXISTS ordinacija;
-CREATE DATABASE ordinacija;
+CREATE DATABASE ordinacija default charset utf8mb4;
 USE ordinacija;
 
 CREATE TABLE osoba(
@@ -18,8 +18,8 @@ CREATE TABLE doktor(
     pacijent INT,
     broj_pacijenata INT,
     datum_zaposlenja DATETIME,
-    placa_bruto DEC(18,2),
-    placa_neto DEC(18,2)
+    placa_bruto DECIMAL(18,2),
+    placa_neto DECIMAL(18,2)
 );
 
 CREATE TABLE pacijent(
@@ -36,8 +36,8 @@ CREATE TABLE tehnicar(
     doktor INT,
     strucna_sprema VARCHAR(50),
     datum_zaposlenja DATETIME,
-    placa_bruto DEC(18,2),
-    placa_neto DEC(18,2)
+    placa_bruto DECIMAL(18,2),
+    placa_neto DECIMAL(18,2)
 );
 
 ALTER TABLE doktor ADD FOREIGN KEY (osoba) REFERENCES osoba(sifra);

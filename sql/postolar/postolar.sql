@@ -1,7 +1,7 @@
 # Postolar
 
 DROP DATABASE IF EXISTS postolar;
-CREATE DATABASE postolar;
+CREATE DATABASE postolar default charset utf8mb4;
 USE postolar;
 
 CREATE TABLE osoba(
@@ -30,7 +30,7 @@ CREATE TABLE popravak(
     korisnik INT NOT NULL,
     obuca INT NOT NULL,
     datum_zavrsetka DATETIME,
-    kn DEC(18,2)
+    kn DECIMAL(18,2)
 );
 
 CREATE TABLE segrt(

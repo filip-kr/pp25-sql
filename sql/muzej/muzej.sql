@@ -1,7 +1,7 @@
 # Muzej
 
 DROP DATABASE IF EXISTS muzej;
-CREATE DATABASE muzej;
+CREATE DATABASE muzej default charset utf8mb4;
 USE muzej;
 
 CREATE TABLE izlozba(
@@ -25,7 +25,7 @@ CREATE TABLE sponzor(
     sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ime VARCHAR(50),
     izlozba INT,
-    kn DEC(18,2)
+    kn DECIMAL(18,2)
 );
 
 ALTER TABLE izlozba ADD FOREIGN KEY (kustos) REFERENCES kustos(sifra);

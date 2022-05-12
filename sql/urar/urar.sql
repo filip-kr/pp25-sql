@@ -1,7 +1,7 @@
 # Urar
 
 DROP DATABASE IF EXISTS urar;
-CREATE DATABASE urar;
+CREATE DATABASE urar default charset utf8mb4;
 USE urar;
 
 CREATE TABLE osoba(
@@ -28,7 +28,7 @@ CREATE TABLE popravak(
     korisnik INT NOT NULL,
     sat INT NOT NULL,
     datum_zavrsetka DATETIME,
-    kn DEC(18,2)
+    kn DECIMAL(18,2)
 );
 
 CREATE TABLE segrt(

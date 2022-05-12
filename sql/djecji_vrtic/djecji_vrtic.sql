@@ -1,15 +1,15 @@
 # Dječji vrtić
 
 DROP DATABASE IF EXISTS djecji_vrtic;
-CREATE DATABASE djecji_vrtic;
+CREATE DATABASE djecji_vrtic default charset utf8mb4;
 USE djecji_vrtic;
 
 CREATE TABLE odgajatelj(
     sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     osoba INT NOT NULL,
     datum_zaposljenja DATETIME,
-    placa_bruto DEC(18,2),
-    placa_neto DEC(18,2),
+    placa_bruto DECIMAL(18,2),
+    placa_neto DECIMAL(18,2),
     strucna_sprema VARCHAR(50)
 );
 
@@ -32,7 +32,7 @@ CREATE TABLE osoba(
     prezime VARCHAR(50) NOT NULL,
     spol VARCHAR(10) NOT NULL,
     datum_rodenja DATETIME,
-    oib CHAR(11),
+    oib CHAR(11)
 );
 
 CREATE TABLE voditelj_skupine(

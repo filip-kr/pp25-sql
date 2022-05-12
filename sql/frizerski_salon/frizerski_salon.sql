@@ -1,15 +1,15 @@
 # Frizerski salon
 
 DROP DATABASE IF EXISTS frizerski_salon;
-CREATE DATABASE frizerski_salon;
+CREATE DATABASE frizerski_salon default charset utf8mb4;
 USE frizerski_salon;
 
 CREATE TABLE djelatnik(
     sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     osoba INT NOT NULL,
     datum_zaposljenja DATETIME,
-    placa_bruto DEC(18,2),
-    placa_neto DEC(18,2)
+    placa_bruto DECIMAL(18,2),
+    placa_neto DECIMAL(18,2)
 );
 
 CREATE TABLE korisnik(
@@ -25,7 +25,7 @@ CREATE TABLE usluga(
     djelatnik INT,
     korisnik INT,
     trajanje INT,
-    cijena DEC(18,2)
+    cijena DECIMAL(18,2)
 );
 
 CREATE TABLE osoba(

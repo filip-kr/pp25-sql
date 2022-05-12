@@ -1,7 +1,7 @@
 # Taksi služba
 
 DROP DATABASE IF EXISTS taksi_sluzba;
-CREATE DATABASE taksi_sluzba;
+CREATE DATABASE taksi_sluzba default charset utf8mb4;
 USE taksi_sluzba;
 
 CREATE TABLE osoba(
@@ -22,16 +22,16 @@ CREATE TABLE vozac(
     sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     osoba INT NOT NULL,
     datum_zaposljenja DATETIME,
-    placa_bruto DEC(18,2),
-    placa_neto DEC(18,2),
+    placa_bruto DECIMAL(18,2),
+    placa_neto DECIMAL(18,2),
     vozilo INT
 );
 
 CREATE TABLE putnik(
     sifra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     osoba INT NOT NULL,
-    km DEC(18,2),
-    cijena DEC(18,2)
+    km DECIMAL(18,2),
+    cijena DECIMAL(18,2)
 );
 
 CREATE TABLE voznja(
@@ -40,8 +40,8 @@ CREATE TABLE voznja(
     vozac INT NOT NULL,
     putnik INT NOT NULL,
     ukupno_putnika INT,
-    ukupno_km DEC(18,2),
-    ukupno_kn DEC(18,2)
+    ukupno_km DECIMAL(18,2),
+    ukupno_kn DECIMAL(18,2)
 );
 
 ALTER TABLE vozilo ADD FOREIGN KEY (vozac) REFERENCES vozac(sifra);

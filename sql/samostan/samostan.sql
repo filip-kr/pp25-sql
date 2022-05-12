@@ -1,7 +1,7 @@
 # Samostan
 
 DROP DATABASE IF EXISTS samostan;
-CREATE DATABASE samostan;
+CREATE DATABASE samostan default charset utf8mb4;
 USE samostan;
 
 CREATE TABLE osoba(
