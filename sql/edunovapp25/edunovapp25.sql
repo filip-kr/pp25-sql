@@ -102,7 +102,7 @@ insert into osoba (sifra,ime,prezime,email,oib)
 values (null,'Shaquille','O''Neal','saki@gmail.com',null);
 
 # 3 - 17
-insert into osoba (sifra,ime,prezime,email,oib)
+insert into osoba (sifra,prezime,ime,email,oib)
 values
 (null,'Todorović','Filip','filip.tod95@gmail.com',null),
 (null,'Majer','Antonio','majer.antonio@gmail.com',null),
@@ -152,7 +152,7 @@ values (1,1),(1,2),(1,3),(1,4),(1,5),
 (1,6),(1,7),(1,8),(1,9),(1,10),
 (1,11),(1,12),(1,13),(1,14),(1,15);
 
--- # UPDATE
+# UPDATE
 -- update smjer set trajanje=130 where sifra=2;
 
 -- update smjer set 
@@ -162,19 +162,19 @@ values (1,1),(1,2),(1,3),(1,4),(1,5),
 
 -- update smjer set trajanje=180 where sifra=2;
 
--- # Uvećanje za 100 kn
+# Uvećanje za 100 kn
 -- update smjer set cijena=cijena+100;
 
--- # Umanjenje za 100 kn
+# Umanjenje za 100 kn
 -- update smjer set cijena=cijena-100;
 
--- # Uvećanje za 10%
+# Uvećanje za 10%
 -- update smjer set cijena=cijena*1.1;
 
--- # Umanjenje za 10%
+# Umanjenje za 10%
 -- update smjer set cijena=cijena*0.9;
 
--- # DELETE
+# DELETE
 -- delete from smjer where sifra=3;
 
 # DZ za 18.5.2022. SRI
@@ -219,3 +219,10 @@ where sifra = 6;
 -- delete from polaznik where sifra = 4;
 -- delete from predavac where sifra = 3;
 -- delete from osoba where sifra = 6;
+
+# DZ za 23.5.2022. PON
+# Izlistajte ime i prezime iz osobe
+-- select ime, prezime from osoba;
+
+# Izlistajte datume početka grupe i naziv grupe
+-- select datumpocetka, naziv from grupa;
