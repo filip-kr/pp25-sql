@@ -7504,7 +7504,10 @@ insert into katalog (sifra, naslov, autor, izdavac,mjesto) values (3221, 'KRALJI
 
 # Izvucite sve autore 
 # koji nisu izdali niti jednu knjigu
-
+-- select b.ime, b.prezime
+-- from katalog a right join autor b 
+-- on a.autor = b.sifra 
+-- where a.naslov is null;
 
 # Unesite sebe kao autora
 insert into autor 
