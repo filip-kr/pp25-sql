@@ -21,7 +21,7 @@ CREATE TABLE mjesto(
 CREATE TABLE katalog(
    sifra	  int NOT NULL PRIMARY KEY,
    autor	  int ,
-   naslov	  varchar(50) NOT NULL CHECK (len(naslov)>3),
+   naslov	  varchar(50) NOT NULL,
    izdavac  int ,
    mjesto   int )DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
@@ -7479,3 +7479,35 @@ insert into katalog (sifra, naslov, autor, izdavac,mjesto) values (3218, 'ODVOJE
 insert into katalog (sifra, naslov, autor, izdavac,mjesto) values (3219, 'NOVI SVIJET DUHA', 18993, 408, 69698);
 insert into katalog (sifra, naslov, autor, izdavac,mjesto) values (3220, 'RUM PUNČ', 15903, 479, 70173);
 insert into katalog (sifra, naslov, autor, izdavac,mjesto) values (3221, 'KRALJICA ŠKOLE', 19299, 441, 71323);
+
+# DZ za 1.6.2022. SRI
+# Izlistajte sve knjige s ljubavnom tematikom
+-- select * from katalog where naslov like '%ljubav%' and sifra not in (2541, 2680, 2938, 3031);
+
+# Umjesto šifra izdavača dovući naziv izdavača
+-- select a.naslov, b.naziv as izdavac, a.mjesto
+-- from katalog a inner join izdavac b
+-- on a.izdavac = b.sifra
+-- where a.naslov like '%ljubav%' and 
+-- a.sifra not in (2541, 2680, 2938, 3031);
+
+# Izlistajte sve izdavače koji su 
+# Društvo s ograničenom odgovornošću
+-- select * from izdavac where naziv like '%d.o.o%';
+
+# Izvucite sve nazive knjiga koje su izdali
+# neaktivni izdavači
+-- select a.naslov
+-- from katalog a inner join izdavac b
+-- on a.izdavac = b.sifra
+-- where b.aktivan = false;
+
+# Izvucite sve autore 
+# koji nisu izdali niti jednu knjigu
+
+
+# Unesite sebe kao autora
+insert into autor 
+(sifra, ime, prezime, datumrodenja)
+values
+(4, 'Filip', 'Krnjaković', null);

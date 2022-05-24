@@ -226,3 +226,51 @@ where sifra = 6;
 
 # Izlistajte datume početka grupe i naziv grupe
 -- select datumpocetka, naziv from grupa;
+
+# DZ za 1.6.2022. SRI
+# Unijeti predavača Karlo Ček
+insert into osoba
+(sifra, ime, prezime, email, oib)
+values
+(null, 'Karlo', 'Ček', 'karlocek@gmail.com', null);
+
+insert into predavac
+(sifra, osoba, iban)
+values
+(null, 20, null);
+
+# Karlo vodi grupu PP25
+update grupa
+set predavac = 4
+where sifra = 1;
+
+# Izlistati samo imena i prezimena
+# svih polaznika smjer PHP programiranje
+-- select e.ime, e.prezime
+-- from smjer a inner join grupa b
+-- on a.sifra = b.smjer
+-- inner join clan c on b.sifra = c.grupa
+-- inner join polaznik d on c.polaznik = d.sifra
+-- inner join osoba e on d.osoba = e.sifra
+-- where a.naziv = 'PHP programiranje';
+
+# Izlistati samo imena i prezimena
+# svih polaznika smjer Java programiranje
+-- select e.ime, e.prezime
+-- from smjer a inner join grupa b
+-- on a.sifra = b.smjer
+-- inner join clan c on b.sifra = c.grupa
+-- inner join polaznik d on c.polaznik = d.sifra
+-- inner join osoba e on d.osoba = e.sifra
+-- where a.naziv = 'Java programiranje';
+
+# Sebe upišite na Java programiranje, grupa JP26
+insert into clan
+(sifra, grupa, polaznik)
+values
+(null, 2, 4);
+
+# onda ponovo izvedite gornji upit
+# Na kraju se obrišite iz grupe JP26
+delete from clan
+where grupa = 2 and polaznik = 4;
