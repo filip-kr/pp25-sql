@@ -1,5 +1,5 @@
-# kolokvij_vjezba 1
-# Ukupno vrijeme: 59:35
+# kolokvij_vjezba1
+# Ukupno vrijeme: 59:35/45:00
 
 # 0. Kreirajte tablice i veze između tablica.
 
