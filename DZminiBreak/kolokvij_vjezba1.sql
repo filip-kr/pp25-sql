@@ -160,10 +160,15 @@ WHERE hlace LIKE '%ana%';
 # tablice sestra sadrže niz znakova ba. Podatke posložite po hlace iz
 # tablice muskarac silazno.
 
-SELECT a.dukserica, b.asocijalno, c.hlace
-FROM svekar a, mladic b, muskarac c, zena d, sestra e
-WHERE d.hlace LIKE 'a%' AND e.haljina LIKE '%ba%'
-ORDER BY c.hlace DESC;
+SELECT a.dukserica, f.asocijalno, e.hlace
+FROM svekar a INNER JOIN sestra_svekar b 
+ON b.svekar = a.sifra
+INNER JOIN sestra c ON b.sestra = c.sifra
+INNER JOIN zena d ON c.sifra = d.sestra
+INNER JOIN muskarac e ON d.sifra = e.zena
+INNER JOIN mladic f ON e.sifra = f.muskarac
+WHERE d.hlace LIKE 'a%' AND c.haljina LIKE '%ba&'
+ORDER BY e.hlace DESC;
 
 # 6. Prikažite kolone haljina i maraka iz tablice sestra čiji se primarni
 # ključ ne nalaze u tablici sestra_svekar
